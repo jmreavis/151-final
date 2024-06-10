@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Cube"))
         {
             OSCHandler.Instance.SendMessageToClient("pd", "/unity/thunder", 1);
+            OSCHandler.Instance.SendMessageToClient("pd", "/unity/trigger", 1);
         }
       
     }
@@ -71,6 +72,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Cube"))
         {
             OSCHandler.Instance.SendMessageToClient("pd", "/unity/thunder", 0);
+            OSCHandler.Instance.SendMessageToClient("pd", "/unity/trigger", 0);
         }
     }
 
