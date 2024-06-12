@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Cube
+  - Box
+  - Box2
   layers:
   - Default
   - TransparentFX

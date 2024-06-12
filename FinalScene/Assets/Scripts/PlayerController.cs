@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 5f; // Movement speed
     public float jumpForce = 5f; // Jump force
+    public float metroFreaky = 75;
     private bool isGrounded;
 
     private Rigidbody rb;
@@ -14,6 +15,8 @@ public class PlayerController : MonoBehaviour
         OSCHandler.Instance.Init();
         Application.runInBackground = true;
         OSCHandler.Instance.SendMessageToClient("pd", "/unity/stop_DSP", 1);
+        OSCHandler.Instance.SendMessageToClient("pd", "/unity/oscplayseq", 1);
+        OSCHandler.Instance.SendMessageToClient("pd", "/unity/seqmetro", metroFreaky);
         rb = GetComponent<Rigidbody>();
     }
 
@@ -54,6 +57,17 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+        } 
+        if (collision.gameObject.CompareTag("Box"))
+        {
+            metroFreaky += 75;
+            OSCHandler.Instance.SendMessageToClient("pd", "/unity/seqmetro", metroFreaky);
+        }
+
+        if (collision.gameObject.CompareTag("Box2"))
+        {
+            metroFreaky -= 75;
+            OSCHandler.Instance.SendMessageToClient("pd", "/unity/seqmetro", metroFreaky);
         }
         if (collision.gameObject.CompareTag("Cube"))
         {
